@@ -42,8 +42,7 @@ var WeatherProvider = (function () {
         var cityID = this.cityIDs[name];
         return this.http.get("http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=" + this.apiKey + "&id=" + cityID)
             .map(function (resp) {
-            var data = resp.json().data;
-            console.log(data);
+            var data = resp.json();
         });
     };
     return WeatherProvider;

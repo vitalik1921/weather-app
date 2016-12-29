@@ -22,7 +22,9 @@ var AppComponent = (function () {
      * On Component Init
      */
     AppComponent.prototype.ngOnInit = function () {
-        console.log(this.weatherProvider.getCityWeather('Kiev'));
+        var _this = this;
+        this.weatherProvider.getCityWeather('Kiev').subscribe(function (data) { _this.data = data; });
+        console.log(this.data);
     };
     return AppComponent;
 }());

@@ -8,6 +8,8 @@ import { WeatherProvider } from '../services/data.service';
     providers: [ WeatherProvider ]
 })
 export class AppComponent implements OnInit {
+    data: any;
+
     /**
      * Constructor
      * @param weatherProvider
@@ -20,6 +22,7 @@ export class AppComponent implements OnInit {
      * On Component Init
      */
     ngOnInit() {
-        console.log(this.weatherProvider.getCityWeather('Kiev'));
+        this.weatherProvider.getCityWeather('Kiev').subscribe((data) => { this.data = data });
+        console.log(this.data);
     }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CityWeather } from '../classes/cityWeather';
 import 'rxjs/add/operator/map';
@@ -26,7 +27,7 @@ export class WeatherProvider{
      * Constructor
      * @param http
      */
-    constructor(private http: Http){ }
+    constructor(private http: Http) { }
 
     /**
      * Get Weather for a City
@@ -37,8 +38,8 @@ export class WeatherProvider{
         let cityID:string = this.cityIDs[name];
         return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=${this.apiKey}&id=${cityID}`)
             .map((resp:Response) => {
-                let data = resp.json().data;
-                console.log(data);
+                let data = resp.json();
+
             });
     }
 }
