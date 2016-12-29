@@ -18,15 +18,15 @@ var AppComponent = (function () {
     function AppComponent(weatherProvider) {
         this.weatherProvider = weatherProvider;
         // lineChart
-        this.lineChartData = [
+        this.data = [
             { data: [65, 59, 80, 81, 56, 55, 40] },
         ];
-        this.lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChartOptions = {
+        this.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        this.options = {
             animation: false,
             responsive: true
         };
-        this.lineChartColors = [
+        this.colors = [
             {
                 backgroundColor: 'rgba(77,83,96,0.2)',
                 borderColor: 'rgba(77,83,96,1)',
@@ -36,26 +36,24 @@ var AppComponent = (function () {
                 pointHoverBorderColor: 'rgba(77,83,96,1)'
             }
         ];
-        this.lineChartLegend = true;
-        this.lineChartType = 'bar';
+        this.legend = true;
+        this.chartType = 'bar';
     }
     AppComponent.prototype.randomize = function () {
-        var _lineChartData = new Array(this.lineChartData.length);
-        for (var i = 0; i < this.lineChartData.length; i++) {
-            _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-            for (var j = 0; j < this.lineChartData[i].data.length; j++) {
-                _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+        var _data = new Array(this.data.length);
+        for (var i = 0; i < this.data.length; i++) {
+            _data[i] = { data: new Array(this.data[i].data.length), label: this.data[i].label };
+            for (var j = 0; j < this.data[i].data.length; j++) {
+                _data[i].data[j] = Math.floor((Math.random() * 100) + 1);
             }
         }
-        this.lineChartData = _lineChartData;
+        this.data = _data;
     };
     /**
      * On Component Init
      */
     AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.weatherProvider.getCityWeather('Kiev').subscribe(function (data) { _this.data = data; });
-        console.log(this.data);
+        console.log(this.weatherProvider.getData);
     };
     return AppComponent;
 }());

@@ -8,18 +8,16 @@ import { WeatherProvider } from '../services/data.service';
     providers: [ WeatherProvider ]
 })
 export class AppComponent implements OnInit {
-    public data: any;
-
     // lineChart
-    public lineChartData:Array<any> = [
+    public data:Array<any> = [
         {data: [65, 59, 80, 81, 56, 55, 40]},
     ];
-    public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    public lineChartOptions:any = {
+    public labels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    public options:any = {
         animation: false,
         responsive: true
     };
-    public lineChartColors:Array<any> = [
+    public colors:Array<any> = [
         { // dark grey
             backgroundColor: 'rgba(77,83,96,0.2)',
             borderColor: 'rgba(77,83,96,1)',
@@ -29,18 +27,18 @@ export class AppComponent implements OnInit {
             pointHoverBorderColor: 'rgba(77,83,96,1)'
         }
     ];
-    public lineChartLegend:boolean = true;
-    public lineChartType:string = 'bar';
+    public legend:boolean = true;
+    public chartType:string = 'bar';
 
     public randomize():void {
-        let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-        for (let i = 0; i < this.lineChartData.length; i++) {
-            _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-            for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-                _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+        let _data:Array<any> = new Array(this.data.length);
+        for (let i = 0; i < this.data.length; i++) {
+            _data[i] = {data: new Array(this.data[i].data.length), label: this.data[i].label};
+            for (let j = 0; j < this.data[i].data.length; j++) {
+                _data[i].data[j] = Math.floor((Math.random() * 100) + 1);
             }
         }
-        this.lineChartData = _lineChartData;
+        this.data = _data;
     }
 
     /**
@@ -55,7 +53,6 @@ export class AppComponent implements OnInit {
      * On Component Init
      */
     ngOnInit() {
-        this.weatherProvider.getCityWeather('Kiev').subscribe((data) => { this.data = data });
-        console.log(this.data);
+        console.log(this.weatherProvider.getData);
     }
 }

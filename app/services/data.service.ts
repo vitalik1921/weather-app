@@ -18,28 +18,45 @@ export class WeatherProvider{
      * @type {{Kiev: string; Lviv: string; Odessa: string}}
      */
     cityIDs: Object = {
-        Kiev: '703448',
-        Lviv: '702550',
-        Odessa: '4166787'
+        'Kiev': '703448',
+        'Lviv': '702550',
+        'Odessa': '4166787'
     };
+
+    /**
+     * City Data
+     */
+    private _data:Object = {};
+
+    /**
+     * Get Data
+     * @returns {Object[]}
+     */
+    get getData(): Object {
+        return this._data;
+    }
 
     /**
      * Constructor
      * @param http
      */
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
+        this.getCityWeather('Kiev');
+        this.getCityWeather('Lviv');
+        this.getCityWeather('Odessa');
+    }
 
     /**
      * Get Weather for a City
      * @param name
      * @returns {Observable<R>}
      */
-    getCityWeather(name: string) {
+    public getCityWeather(name: string) {
         let cityID:string = this.cityIDs[name];
-        return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=${this.apiKey}&id=${cityID}`)
+        this.http.get(`http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=${this.apiKey}&id=${cityID}`)
             .map((resp:Response) => {
-                let data = resp.json();
-
-            });
+                return new CityWeather(resp.json());
+            })
+            .subscribe((data) => { this._data[name] = data });
     }
 }

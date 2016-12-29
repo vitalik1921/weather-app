@@ -10,12 +10,12 @@
     <div class="row">
         <h1>Temperature</h1>
         <canvas baseChart width="100%" height="40"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [colors]="lineChartColors"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"
+                [datasets]="data"
+                [labels]="labels"
+                [options]="options"
+                [colors]="colors"
+                [legend]="legend"
+                [chartType]="chartType"
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
     </div>
