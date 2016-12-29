@@ -15,9 +15,7 @@
                 [options]="options"
                 [colors]="colors"
                 [legend]="legend"
-                [chartType]="chartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+                [chartType]="chartType"></canvas>
     </div>
     <div class="row">
         <h1>Application data</h1>
@@ -25,44 +23,19 @@
             <div class="col">
                 <h3>Weather conditions</h3>
                 <ul class="days">
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day" *ngFor="let item of conditions"><span class="label">{{ item.caption }}</span><span class="content">{{ item.value }}</span></li>
                 </ul>
             </div>
             <div class="col">
                 <h3>Humidity</h3>
                 <ul class="days">
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day" *ngFor="let item of humidity"><span class="label">{{ item.caption }}</span><span class="content">{{ item.value }}</span></li>
                 </ul>
             </div>
             <div class="col">
                 <h3>Wind speed</h3>
                 <ul class="days">
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
-                </ul>
+                    <li class="day" *ngFor="let item of windSpeed"><span class="label">{{ item.caption }}</span><span class="content">{{ item.value }}</span></li>                </ul>
             </div>
         </div>
 

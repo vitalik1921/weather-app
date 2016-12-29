@@ -9,18 +9,24 @@ import { WeatherProvider } from '../services/data.service';
 })
 export class AppComponent implements OnInit {
 
-    public data:Array<any> = [
+    private currentDataSource: any;
+
+    public conditions: Object;
+    public humidity: Object;
+    public windSpeed: Object;
+
+    private data:Array<any> = [
         {data: []},
     ];
 
-    public labels:Array<any> = [];
+    private labels:Array<any> = [];
 
-    public options:any = {
+    private options:any = {
         animation: false,
         responsive: true
     };
 
-    public colors:Array<any> = [
+    private colors:Array<any> = [
         { // dark grey
             backgroundColor: 'rgba(77,83,96,0.2)',
             borderColor: 'rgba(77,83,96,1)',
@@ -30,8 +36,8 @@ export class AppComponent implements OnInit {
             pointHoverBorderColor: 'rgba(77,83,96,1)'
         }
     ];
-    public legend:boolean = true;
-    public chartType:string = 'bar';
+    private legend:boolean = true;
+    private chartType:string = 'bar';
 
     /**
      * Constructor
@@ -41,14 +47,41 @@ export class AppComponent implements OnInit {
 
     }
 
+    /**
+     * On Change
+     * @param deviceValue
+     */
     onChange(deviceValue) {
-        console.log(deviceValue);
+        let _this = this;
+        this.currentDataSource.unsubscribe();
+        this.currentDataSource = this.weatherProvider.getCityWeather(deviceValue)
+            .subscribe((data) => {
+                _this.subscribeData(data)
+            });
     }
 
     /**
      * On Component Init
      */
     ngOnInit() {
-        let data:Object = this.weatherProvider.getData;
+        let _this = this;
+        this.currentDataSource = this.weatherProvider.getCityWeather('Kiev')
+            .subscribe((data) => {
+                _this.subscribeData(data)
+            });
+    }
+
+    /**
+     * Subscrib data
+     * @param data
+     */
+    subscribeData(data) {
+        this.data = [
+            { data: data.temperatures },
+        ];
+        this.labels = data.legend;
+        this.conditions = data.conditions;
+        this.humidity = data.humidities;
+        this.windSpeed = data.windSpeed;
     }
 }

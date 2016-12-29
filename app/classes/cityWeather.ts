@@ -13,9 +13,9 @@ export class CityWeather {
     private data: Object;
     private _legend: Array<string> = [];
     private _temperatures: Array<string> = [];
-    private _conditions: Object = {};
-    private _humidities: Object = {};
-    private _windSpeed: Object = {};
+    private _conditions: Array<Object> = [];
+    private _humidities: Array<Object> = [];
+    private _windSpeed: Array<Object> = [];
 
     get legend(): Array<string> {
         return this._legend;
@@ -38,13 +38,15 @@ export class CityWeather {
             let timeStr = timeConverter(item['dt']);
             this._legend.push(timeStr);
             this._temperatures.push(item['main']['temp'].toFixed(0));
-            this._windSpeed[timeStr] = item['wind']['speed'].toString() + ' m/s';
-            this._humidities[timeStr] = item['main']['humidity'].toString() + ' m/s';
+            this._windSpeed.push( { caption: timeStr, value: item['wind']['speed'].toString() + ' m/s' } );
+            this._humidities.push( { caption: timeStr, value: item['main']['humidity'].toString() } );
             let weatherString:string = '';
             for (let str of item['weather']) {
-                weatherString =+ ' ' + str['description'];
+                console.log(str['description']);
+                weatherString += str['description'] + ' ';
             }
-            this._conditions[timeStr] = weatherString;
+            this._conditions.push( { caption: timeStr, value: weatherString } );
         }
+        console.log(this._conditions);
     }
 }

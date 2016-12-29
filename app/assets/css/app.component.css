@@ -56,3 +56,14 @@ canvas {
     line-height: 30px;
     height: 30px;
 }
+
+@media (max-width: 960px) {
+    .flex-row {
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+    .col {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

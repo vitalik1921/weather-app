@@ -38,14 +38,40 @@ var AppComponent = (function () {
         this.legend = true;
         this.chartType = 'bar';
     }
+    /**
+     * On Change
+     * @param deviceValue
+     */
     AppComponent.prototype.onChange = function (deviceValue) {
-        console.log(deviceValue);
+        var _this = this;
+        this.currentDataSource.unsubscribe();
+        this.currentDataSource = this.weatherProvider.getCityWeather(deviceValue)
+            .subscribe(function (data) {
+            _this.subscribeData(data);
+        });
     };
     /**
      * On Component Init
      */
     AppComponent.prototype.ngOnInit = function () {
-        var data = this.weatherProvider.getData;
+        var _this = this;
+        this.currentDataSource = this.weatherProvider.getCityWeather('Kiev')
+            .subscribe(function (data) {
+            _this.subscribeData(data);
+        });
+    };
+    /**
+     * Subscrib data
+     * @param data
+     */
+    AppComponent.prototype.subscribeData = function (data) {
+        this.data = [
+            { data: data.temperatures },
+        ];
+        this.labels = data.legend;
+        this.conditions = data.conditions;
+        this.humidity = data.humidities;
+        this.windSpeed = data.windSpeed;
     };
     return AppComponent;
 }());

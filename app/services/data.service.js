@@ -33,38 +33,18 @@ var WeatherProvider = (function () {
             'Lviv': '702550',
             'Odessa': '4166787'
         };
-        /**
-         * City Data
-         */
-        this._data = {};
-        this.getCityWeather('Kiev');
-        this.getCityWeather('Lviv');
-        this.getCityWeather('Odessa');
     }
-    Object.defineProperty(WeatherProvider.prototype, "getData", {
-        /**
-         * Get Data
-         * @returns {Object[]}
-         */
-        get: function () {
-            return this._data;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * Get Weather for a City
      * @param name
      * @returns {Observable<R>}
      */
     WeatherProvider.prototype.getCityWeather = function (name) {
-        var _this = this;
         var cityID = this.cityIDs[name];
-        this.http.get("http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=" + this.apiKey + "&id=" + cityID)
+        return this.http.get("http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=" + this.apiKey + "&id=" + cityID)
             .map(function (resp) {
             return new cityWeather_1.CityWeather(resp.json());
-        })
-            .subscribe(function (data) { _this._data[name] = data; });
+        });
     };
     return WeatherProvider;
 }());

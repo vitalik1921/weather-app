@@ -24,27 +24,10 @@ export class WeatherProvider{
     };
 
     /**
-     * City Data
-     */
-    private _data: { [name: string]: Object } = {};
-
-    /**
-     * Get Data
-     * @returns {Object[]}
-     */
-    get getData(): Object {
-        return this._data;
-    }
-
-    /**
      * Constructor
      * @param http
      */
-    constructor(private http: Http) {
-        this.getCityWeather('Kiev');
-        this.getCityWeather('Lviv');
-        this.getCityWeather('Odessa');
-    }
+    constructor(private http: Http) { }
 
     /**
      * Get Weather for a City
@@ -53,10 +36,9 @@ export class WeatherProvider{
      */
     public getCityWeather(name: string) {
         let cityID:string = this.cityIDs[name];
-        this.http.get(`http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=${this.apiKey}&id=${cityID}`)
+        return this.http.get(`http://api.openweathermap.org/data/2.5/forecast?cnt=10&units=metric&appid=${this.apiKey}&id=${cityID}`)
             .map((resp:Response) => {
                 return new CityWeather(resp.json());
-            })
-            .subscribe((data) => { this._data[name] = data });
+            });
     }
 }
