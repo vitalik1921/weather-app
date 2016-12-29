@@ -17,11 +17,10 @@ var AppComponent = (function () {
      */
     function AppComponent(weatherProvider) {
         this.weatherProvider = weatherProvider;
-        // lineChart
         this.data = [
-            { data: [65, 59, 80, 81, 56, 55, 40] },
+            { data: [] },
         ];
-        this.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        this.labels = [];
         this.options = {
             animation: false,
             responsive: true
@@ -39,21 +38,14 @@ var AppComponent = (function () {
         this.legend = true;
         this.chartType = 'bar';
     }
-    AppComponent.prototype.randomize = function () {
-        var _data = new Array(this.data.length);
-        for (var i = 0; i < this.data.length; i++) {
-            _data[i] = { data: new Array(this.data[i].data.length), label: this.data[i].label };
-            for (var j = 0; j < this.data[i].data.length; j++) {
-                _data[i].data[j] = Math.floor((Math.random() * 100) + 1);
-            }
-        }
-        this.data = _data;
+    AppComponent.prototype.onChange = function (deviceValue) {
+        console.log(deviceValue);
     };
     /**
      * On Component Init
      */
     AppComponent.prototype.ngOnInit = function () {
-        console.log(this.weatherProvider.getData);
+        var data = this.weatherProvider.getData;
     };
     return AppComponent;
 }());

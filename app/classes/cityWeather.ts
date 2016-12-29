@@ -1,5 +1,5 @@
 
-function timeConverter(timestamp: number){
+function timeConverter(timestamp: number): string {
     let a = new Date(timestamp * 1000);
     let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     let month = months[a.getMonth()];
@@ -11,12 +11,18 @@ function timeConverter(timestamp: number){
 
 export class CityWeather {
     private data: Object;
-    private legend: Array<string>;
-    private _temperatures: Array<string>;
-    private _conditions: Array<string>;
-    private _humidities: Array<string>;
-    private _windSpeed: Array<string>;
+    private _legend: Array<string> = [];
+    private _temperatures: Array<string> = [];
+    private _conditions: Object = {};
+    private _humidities: Object = {};
+    private _windSpeed: Object = {};
 
+    get legend(): Array<string> {
+        return this._legend;
+    }
+    get temperatures(): Array<string> {
+        return this._temperatures;
+    }
     get windSpeed(): Object {
         return this._windSpeed;
     }
@@ -26,15 +32,19 @@ export class CityWeather {
     get conditions(): Object {
         return this._conditions;
     }
-    get temperatures(): Object {
-        return this._temperatures;
-    }
 
     constructor(data: Object) {
-        console.log(data);
         for (let item of data['list']) {
-            console.log(item);
+            let timeStr = timeConverter(item['dt']);
+            this._legend.push(timeStr);
+            this._temperatures.push(item['main']['temp'].toFixed(0));
+            this._windSpeed[timeStr] = item['wind']['speed'].toString() + ' m/s';
+            this._humidities[timeStr] = item['main']['humidity'].toString() + ' m/s';
+            let weatherString:string = '';
+            for (let str of item['weather']) {
+                weatherString =+ ' ' + str['description'];
+            }
+            this._conditions[timeStr] = weatherString;
         }
-        this.data = data;
     }
 }

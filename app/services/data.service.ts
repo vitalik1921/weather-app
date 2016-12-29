@@ -26,7 +26,7 @@ export class WeatherProvider{
     /**
      * City Data
      */
-    private _data:Object = {};
+    private _data: { [name: string]: Object } = {};
 
     /**
      * Get Data

@@ -10,13 +10,40 @@ function timeConverter(timestamp) {
 }
 var CityWeather = (function () {
     function CityWeather(data) {
-        console.log(data);
+        this._legend = [];
+        this._temperatures = [];
+        this._conditions = {};
+        this._humidities = {};
+        this._windSpeed = {};
         for (var _i = 0, _a = data['list']; _i < _a.length; _i++) {
             var item = _a[_i];
-            console.log(item);
+            var timeStr = timeConverter(item['dt']);
+            this._legend.push(timeStr);
+            this._temperatures.push(item['main']['temp'].toFixed(0));
+            this._windSpeed[timeStr] = item['wind']['speed'].toString() + ' m/s';
+            this._humidities[timeStr] = item['main']['humidity'].toString() + ' m/s';
+            var weatherString = '';
+            for (var _b = 0, _c = item['weather']; _b < _c.length; _b++) {
+                var str = _c[_b];
+                weatherString = +' ' + str['description'];
+            }
+            this._conditions[timeStr] = weatherString;
         }
-        this.data = data;
     }
+    Object.defineProperty(CityWeather.prototype, "legend", {
+        get: function () {
+            return this._legend;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CityWeather.prototype, "temperatures", {
+        get: function () {
+            return this._temperatures;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(CityWeather.prototype, "windSpeed", {
         get: function () {
             return this._windSpeed;
@@ -34,13 +61,6 @@ var CityWeather = (function () {
     Object.defineProperty(CityWeather.prototype, "conditions", {
         get: function () {
             return this._conditions;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CityWeather.prototype, "temperatures", {
-        get: function () {
-            return this._temperatures;
         },
         enumerable: true,
         configurable: true

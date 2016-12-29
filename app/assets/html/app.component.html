@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         Select City:
-        <select name="city" id="city">
+        <select name="city" id="city" (change)="onChange($event.target.value)">
             <option value="Kiev">Kiev</option>
             <option value="Lviv">Lviv</option>
             <option value="Odessa">Odessa</option>
@@ -38,11 +38,31 @@
             </div>
             <div class="col">
                 <h3>Humidity</h3>
-
+                <ul class="days">
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                </ul>
             </div>
             <div class="col">
                 <h3>Wind speed</h3>
-
+                <ul class="days">
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                    <li class="day"><span class="label">Label</span><span class="content">Content</span></li>
+                </ul>
             </div>
         </div>
 
