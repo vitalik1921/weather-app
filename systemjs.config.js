@@ -1,7 +1,8 @@
 (function (global) {
     System.config({
         paths: {
-            'npm:': 'node_modules/'
+            'npm:': 'node_modules/',
+            'ng2-charts/ng2-charts': 'node_modules/ng2-charts/ng2-charts.js'
         },
         map: {
             app: 'app',
@@ -25,6 +26,9 @@
                 defaultExtension: 'js'
             },
             rxjs: {
+                defaultExtension: 'js'
+            },
+            "node_modules/ng2-charts": {
                 defaultExtension: 'js'
             }
         }

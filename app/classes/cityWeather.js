@@ -1,4 +1,9 @@
 "use strict";
+var dayWeather = (function () {
+    function dayWeather() {
+    }
+    return dayWeather;
+}());
 var CityWeather = (function () {
     function CityWeather() {
     }

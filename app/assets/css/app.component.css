@@ -1,4 +1,39 @@
+:host {
+    color: #34434a;
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 h1 {
-    font-size: 16px;
-    color: red;
+    border-bottom: 1px solid #A1ABB4;
+    padding-bottom: 3px;
+}
+canvas {
+    background-color: #fff;
+}
+.flex-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.col {
+    background-color: #fff;
+    width: 32%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.col:nth-child(1) {
+    border-left: 3px solid #FA9D28;
+}
+.col:nth-child(2) {
+    border-left: 3px solid #88BC50;
+}
+.col:nth-child(3) {
+    border-left: 3px solid #643DAE;
+}
+.col h3 {
+    margin-top: 0;
 }
